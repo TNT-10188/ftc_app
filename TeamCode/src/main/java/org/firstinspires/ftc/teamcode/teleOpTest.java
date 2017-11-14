@@ -18,28 +18,20 @@ public class teleOpTest extends LinearOpMode{
     @Override
     public void runOpMode() throws InterruptedException{
 
-        robot.init();
-
-        robot.frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
-        robot.frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
-        robot.backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
-        robot.backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
-
-        robot.frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
-        robot.backLeftMotor.setDirection(DcMotor.Direction.REVERSE);
-
-        robot.jewelArm = hardwareMap.servo.get("jewelArm");
-        robot.jewelFlick = hardwareMap.servo.get("jewelFlick");
+        robot.init(hardwareMap);
+        robot.collectorInit();
 
         waitForStart();
 
         while(opModeIsActive()){
 
-            robot.frontLeftMotor.setPower(gamepad1.left_stick_y);
-            robot.frontRightMotor.setPower(gamepad1.left_stick_y);
-            robot.backLeftMotor.setPower(gamepad1.left_stick_y);
-            robot.backRightMotor.setPower(gamepad1.left_stick_y);
+            //Control for motors
+            robot.leftFrontMotor.setPower(gamepad1.left_stick_y);
+            robot.rightFrontMotor.setPower(gamepad1.left_stick_y);
+            robot.leftRearMotor.setPower(gamepad1.left_stick_y);
+            robot.rightRearMotor.setPower(gamepad1.left_stick_y);
 
+            /**
             if (gamepad1.a == true){
                 robot.jewelArm.setPosition(robot.ARM_UP);
             }else if (gamepad1.y == true){
@@ -53,9 +45,51 @@ public class teleOpTest extends LinearOpMode{
             }else{
                 robot.jewelFlick.setPosition(robot.FLICK_INIT);
             }
+            */
+
+            //Control for collectors
+            if (gamepad2.dpad_up == true){
+                robot.leftFrontGuidance.setPosition(1);
+                robot.rightFrontGuidance.setPosition(1);
+                robot.leftRearGuidance.setPosition(1);
+                robot.rightRearGuidance.setPosition(1);
+                robot.leftCollector.setPosition(1);
+                robot.rightCollector.setPosition(1);
+            }else if (gamepad2.dpad_down == true){
+                robot.leftFrontGuidance.setPosition(0);
+                robot.rightFrontGuidance.setPosition(0);
+                robot.leftRearGuidance.setPosition(0);
+                robot.rightRearGuidance.setPosition(0);
+                robot.leftCollector.setPosition(0);
+                robot.rightCollector.setPosition(0);
+            }else if (gamepad2.dpad_left == true){
+                robot.leftCollector.setPosition(1);
+                robot.rightCollector.setPosition(0);
+            }else if (gamepad2.dpad_right == true){
+                robot.leftCollector.setPosition(0);
+                robot.rightCollector.setPosition(1);
+            }else if (gamepad2.x == true){
+                robot.leftFrontGuidance.setPosition(1);
+                robot.rightFrontGuidance.setPosition(1);
+                robot.leftCollector.setPosition(1);
+                robot.rightCollector.setPosition(1);
+            }else if (gamepad2.y == true){
+                robot.leftFrontGuidance.setPosition(0);
+                robot.rightFrontGuidance.setPosition(0);
+                robot.leftCollector.setPosition(0);
+                robot.rightCollector.setPosition(0);
+            }else if (gamepad2.a == true){
+                robot.leftRearGuidance.setPosition(1);
+                robot.rightRearGuidance.setPosition(1);
+            }else if (gamepad2.b == true){
+                robot.leftRearGuidance.setPosition(0);
+                robot.rightRearGuidance.setPosition(0);
+            }else{
+                robot.collectorInit();
+            }
 
 
-
+            
             idle();
         }
     }
