@@ -11,13 +11,23 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class flipperHardware {
 
-    public DcMotor frontLeftMotor  = null;
-    public DcMotor frontRightMotor  = null;
-    public DcMotor backLeftMotor = null;
-    public DcMotor backRightMotor = null;
+    //Adds motor members.
+    public DcMotor leftFrontMotor  = null;
+    public DcMotor rightFrontMotor  = null;
+    public DcMotor leftRearMotor = null;
+    public DcMotor rightRearMotor = null;
 
+    //Adds jewel arm members.
     public Servo jewelArm = null;
     public Servo jewelFlick = null;
+
+    //Adds collector members.
+    public Servo leftFrontGuidance = null;
+    public Servo rightFrontGuidance = null;
+    public Servo leftRearGuidance = null;
+    public Servo rightRearGuidance = null;
+    public Servo leftCollector = null;
+    public Servo rightCollector = null;
 
     //Useful variables
     public static final double ARM_UP = 0.2;
@@ -30,7 +40,7 @@ public class flipperHardware {
     HardwareMap hwMap = null;
     private ElapsedTime period = new ElapsedTime();
 
-    public flipperHardware{
+    public flipperHardware(){
 
     }
 
@@ -38,24 +48,46 @@ public class flipperHardware {
 
         hwMap = ahwMap;
 
-        frontLeftMotor = hwMap.dcMotor.get("frontLeftMotor");
-        frontRightMotor = hwMap.dcMotor.get("frontRightMotor");
-        backLeftMotor = hwMap.dcMotor.get("backLeftMotor");
-        backRightMotor = hwMap.dcMotor.get("backRightMotor");
+        //Define motors
+        leftFrontMotor = hwMap.dcMotor.get("frontLeftMotor");
+        rightFrontMotor = hwMap.dcMotor.get("frontRightMotor");
+        leftRearMotor = hwMap.dcMotor.get("backLeftMotor");
+        rightRearMotor = hwMap.dcMotor.get("backRightMotor");
 
-        frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
-        backLeftMotor.setDirection(DcMotor.Direction.REVERSE);
+        //Reverse left motors
+        leftFrontMotor.setDirection(DcMotor.Direction.REVERSE);
+        leftRearMotor.setDirection(DcMotor.Direction.REVERSE);
 
-        frontLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        backRightMotor.setPower(0);
+        //Zero motors
+        leftFrontMotor.setPower(0);
+        rightFrontMotor.setPower(0);
+        leftRearMotor.setPower(0);
+        rightRearMotor.setPower(0);
 
+        //Define jewel arm
         jewelArm = hwMap.servo.get("jewelArm");
         jewelFlick = hwMap.servo.get("jewelFlick");
 
+        //Init arm
         jewelArm.setPosition(ARM_UP);
         jewelFlick.setPosition(FLICK_INIT);
+
+        //Define collectors
+        leftFrontGuidance = hwMap.servo.get("leftFrontGuidance");
+        rightFrontGuidance = hwMap.servo.get("rightFrontGuidance");
+        leftRearGuidance = hwMap.servo.get("leftRearGuidance");
+        rightRearGuidance =hwMap.servo.get("rightRearGuidance");
+        leftCollector = hwMap.servo.get("leftCollector");
+        rightCollector =hwMap.servo.get("rightCollector");
+    }
+
+    public void collectorInit(){
+        leftFrontGuidance.setPosition(0.5);
+        rightFrontGuidance.setPosition(0.5);
+        leftRearGuidance.setPosition(0.5);
+        rightRearGuidance.setPosition(0.5);
+        leftCollector.setPosition(0.5);
+        rightCollector.setPosition(0.5);
     }
 }
 
