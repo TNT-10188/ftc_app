@@ -2,8 +2,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
 /**
  * Created by setht on 9/24/2017.
@@ -89,7 +87,7 @@ public class teleOpTest extends LinearOpMode{
             }
 
 
-            
+
             idle();
         }
     }
