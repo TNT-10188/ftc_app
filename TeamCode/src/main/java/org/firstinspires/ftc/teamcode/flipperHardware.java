@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cColorSensor;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -7,6 +9,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
  * Created by setht on 11/9/2017.
+ * Updated by setht on 2017-12-31
  */
 
 public class flipperHardware {
@@ -28,6 +31,9 @@ public class flipperHardware {
     public Servo rightRearGuidance = null;
     public Servo leftCollector = null;
     public Servo rightCollector = null;
+
+    //Adds sensor members
+    public ColorSensor colorSensor = null;
 
     //Useful variables
     public static final double ARM_UP = 0.2;
@@ -79,8 +85,11 @@ public class flipperHardware {
         rightRearGuidance =hwMap.servo.get("rightRearGuidance");
         leftCollector = hwMap.servo.get("leftCollector");
         rightCollector =hwMap.servo.get("rightCollector");
-    }
 
+        //Define sensors
+        colorSensor = hwMap.get(ColorSensor.class, "colorSensor");
+    }
+    //Initializes guidance motors
     public void collectorInit(){
         leftFrontGuidance.setPosition(0.5);
         rightFrontGuidance.setPosition(0.5);
