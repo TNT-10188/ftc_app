@@ -1,5 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.app.Activity;
+import android.graphics.Color;
+import android.view.View;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -22,6 +26,12 @@ public class teleOpTest extends LinearOpMode{
         robot.collectorInit();
 
         waitForStart();
+
+        float hsvValues[] = {0F,0F,0F};
+        final float values[] = hsvValues;
+
+        int relativeLayoutId = hardwareMap.appContext.getResources().getIdentifier("RelativeLayout", "id", hardwareMap.appContext.getPackageName());
+        final View relativeLayout = ((Activity) hardwareMap.appContext).findViewById(relativeLayoutId);
 
         while(opModeIsActive()){
 
@@ -88,8 +98,11 @@ public class teleOpTest extends LinearOpMode{
                 robot.collectorInit();
             }
 
+            Color.RGBToHSV(robot.colorSensor.red() * 8, robot.colorSensor.green() * 8, robot.colorSensor.blue() * 8, hsvValues);
 
-            
+            telemetry.addData("Red :", robot.colorSensor.red());
+            telemetry.addData("Blue:", robot.colorSensor.blue());
+
             idle();
         }
     }
