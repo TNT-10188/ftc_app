@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Updated by setht on 2017-12-31
  */
 
-public class flipperHardware {
+public class paternosterHardware {
 
     //Adds motor members.
     public DcMotor leftFrontMotor  = null;
@@ -46,7 +46,7 @@ public class flipperHardware {
     HardwareMap hwMap = null;
     private ElapsedTime period = new ElapsedTime();
 
-    public flipperHardware(){
+    public paternosterHardware(){
 
     }
 

@@ -15,7 +15,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 //@Disabled
 public class teleOpTest extends LinearOpMode{
 
-    flipperHardware robot   = new flipperHardware();
+    paternosterHardware robot   = new paternosterHardware();
 
     @Override
     public void runOpMode() throws InterruptedException{
