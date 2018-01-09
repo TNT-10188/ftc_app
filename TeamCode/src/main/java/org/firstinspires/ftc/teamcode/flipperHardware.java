@@ -55,10 +55,10 @@ public class flipperHardware {
         hwMap = ahwMap;
 
         //Define motors
-        leftFrontMotor = hwMap.dcMotor.get("frontLeftMotor");
-        rightFrontMotor = hwMap.dcMotor.get("frontRightMotor");
-        leftRearMotor = hwMap.dcMotor.get("backLeftMotor");
-        rightRearMotor = hwMap.dcMotor.get("backRightMotor");
+        leftFrontMotor = hwMap.dcMotor.get("leftFrontMotor");
+        rightFrontMotor = hwMap.dcMotor.get("rightFrontMotor");
+        leftRearMotor = hwMap.dcMotor.get("leftRearMotor");
+        rightRearMotor = hwMap.dcMotor.get("rightRearMotor");
 
         //Reverse left motors
         leftFrontMotor.setDirection(DcMotor.Direction.REVERSE);
