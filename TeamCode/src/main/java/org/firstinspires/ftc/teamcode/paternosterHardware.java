@@ -20,6 +20,9 @@ public class paternosterHardware {
     public DcMotor leftRearMotor = null;
     public DcMotor rightRearMotor = null;
 
+    //Adds lifter member
+    public DcMotor winchMotor = null;
+
     //Adds jewel arm members.
     public Servo jewelArm = null;
     public Servo jewelFlick = null;
@@ -46,6 +49,7 @@ public class paternosterHardware {
     HardwareMap hwMap = null;
     private ElapsedTime period = new ElapsedTime();
 
+
     public paternosterHardware(){
 
     }
@@ -69,6 +73,9 @@ public class paternosterHardware {
         rightFrontMotor.setPower(0);
         leftRearMotor.setPower(0);
         rightRearMotor.setPower(0);
+
+        //Define winch motor
+        winchMotor = hwMap.dcMotor.get("winchMotor");
 
         //Define jewel arm
         jewelArm = hwMap.servo.get("jewelArm");
