@@ -105,5 +105,14 @@ public class paternosterHardware {
         leftCollector.setPosition(0.5);
         rightCollector.setPosition(0.5);
     }
+    //Shortens the control of the guidance servos
+    public void guidanceControl(double guide1, double guide2, double guide3, double guide4, double guide5, double guide6){
+        leftFrontGuidance.setPosition(guide1);
+        rightFrontGuidance.setPosition(guide2);
+        leftRearGuidance.setPosition(guide3);
+        rightRearGuidance.setPosition(guide4);
+        leftCollector.setPosition(guide5);
+        rightCollector.setPosition(guide6);
+    }
 }
 
