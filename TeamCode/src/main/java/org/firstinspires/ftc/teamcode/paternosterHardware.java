@@ -94,7 +94,7 @@ public class paternosterHardware {
         rightCollector =hwMap.servo.get("rightCollector");
 
         //Define sensors
-        colorSensor = hwMap.get(ColorSensor.class, "colorSensor");
+        colorSensor = hwMap.get(ModernRoboticsI2cColorSensor.class, "colorSensor");
     }
     //Initializes guidance motors
     public void collectorInit(){
