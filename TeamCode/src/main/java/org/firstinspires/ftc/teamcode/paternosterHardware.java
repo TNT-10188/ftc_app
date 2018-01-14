@@ -119,5 +119,68 @@ public class paternosterHardware {
         leftCollector.setPosition(guide5);
         rightCollector.setPosition(guide6);
     }
+
+    public void driveTime(double speed, double time){
+        if (speed >= -1 && speed <= 1){
+            runtime.reset();
+            while (runtime.seconds() < time) {
+                leftFrontMotor.setPower(speed);
+                rightFrontMotor.setPower(speed);
+                leftRearMotor.setPower(speed);
+                rightRearMotor.setPower(speed);
+            }
+        }
+        leftFrontMotor.setPower(0);
+        rightFrontMotor.setPower(0);
+        leftRearMotor.setPower(0);
+        rightRearMotor.setPower(0);
+    }
+
+    public void driveInch(double leftInch, double rightInch, double speed){
+
+        int leftFrontTarget;
+        int rightFrontTarget;
+        int leftRearTarget;
+        int rightRearTarget;
+
+        if (speed >= -1 && speed <= 1){
+            leftFrontTarget = leftFrontMotor.getCurrentPosition() + (int)(leftInch * COUNTS_PER_INCH);
+            rightFrontTarget = rightFrontMotor.getCurrentPosition() + (int)(rightInch * COUNTS_PER_INCH);
+            leftRearTarget = leftRearMotor.getCurrentPosition() + (int)(leftInch * COUNTS_PER_INCH);
+            rightRearTarget = rightRearMotor.getCurrentPosition() + (int)(rightInch * COUNTS_PER_INCH);
+
+            leftFrontMotor.setTargetPosition(leftFrontTarget);
+            rightFrontMotor.setTargetPosition(rightFrontTarget);
+            leftRearMotor.setTargetPosition(leftRearTarget);
+            rightRearMotor.setTargetPosition(rightRearTarget);
+
+            leftFrontMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rightFrontMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            leftRearMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rightRearMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            leftFrontMotor.setPower(Math.abs(speed));
+            rightFrontMotor.setPower(Math.abs(speed));
+            leftRearMotor.setPower(Math.abs(speed));
+            rightRearMotor.setPower(Math.abs(speed));
+
+            while(leftFrontMotor.isBusy() && rightFrontMotor.isBusy() && leftRearMotor.isBusy() && rightRearMotor.isBusy()){
+
+            }
+            leftFrontMotor.setPower(0);
+            rightFrontMotor.setPower(0);
+            leftRearMotor.setPower(0);
+            rightRearMotor.setPower(0);
+
+            leftFrontMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            rightFrontMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            leftRearMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            rightRearMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        }
+        leftFrontMotor.setPower(0);
+        rightFrontMotor.setPower(0);
+        leftRearMotor.setPower(0);
+        rightRearMotor.setPower(0);
+    }
 }
 
