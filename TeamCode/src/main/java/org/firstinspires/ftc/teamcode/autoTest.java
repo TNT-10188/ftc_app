@@ -79,6 +79,14 @@ public class autoTest extends LinearOpMode {
         telemetry.addData("Status", "Leg 1 complete");
         telemetry.update();
 
+        //Leg 2: Drive backwards 12in at full speed
+        telemetry.addData("Status", "Leg 2 in progress");
+        telemetry.update();
+
+        robot.driveInch(-12, -12, 1);
+
+        telemetry.addData("Status", "Leg 2 complete");
+        telemetry.update();
 
         //Show that opmode is complete
         telemetry.addData("Status", "Complete");
