@@ -46,8 +46,13 @@ public class paternosterHardware {
     public double FLICK_RIGHT = 1;
     public double FLICK_INIT = 0.7;
 
+    static final double COUNTS_PER_MOTOR_REV = 1440 ;
+    static final double DRIVE_GEAR_REDUCTION = 40.0 ;
+    static final double WHEEL_DIAMETER_INCHES = 4.0 ;
+    static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.1415);
+
     HardwareMap hwMap = null;
-    private ElapsedTime period = new ElapsedTime();
+    private ElapsedTime runtime = new ElapsedTime();
 
 
     public paternosterHardware(){
