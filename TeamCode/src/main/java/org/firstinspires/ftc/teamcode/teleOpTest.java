@@ -27,6 +27,7 @@ public class teleOpTest extends LinearOpMode{
 
         float hsvValues[] = {0F,0F,0F};
         final float values[] = hsvValues;
+        int speedReduction = 3;
 
         int relativeLayoutId = hardwareMap.appContext.getResources().getIdentifier("RelativeLayout", "id", hardwareMap.appContext.getPackageName());
         final View relativeLayout = ((Activity) hardwareMap.appContext).findViewById(relativeLayoutId);
@@ -34,11 +35,10 @@ public class teleOpTest extends LinearOpMode{
         while(opModeIsActive()){
 
             //Control for motors
-            robot.leftFrontMotor.setPower(gamepad1.left_stick_y);
-            robot.rightFrontMotor.setPower(gamepad1.right_stick_y);
-            robot.leftRearMotor.setPower(gamepad1.left_stick_y);
-            robot.rightRearMotor.setPower(gamepad1.right_stick_y);
-
+            robot.leftFrontMotor.setPower((gamepad1.right_stick_y-gamepad1.right_stick_x)/speedReduction);
+            robot.rightFrontMotor.setPower((gamepad1.right_stick_y+gamepad1.right_stick_x)/speedReduction);
+            robot.leftRearMotor.setPower((gamepad1.right_stick_y-gamepad1.right_stick_x)/speedReduction);
+            robot.rightRearMotor.setPower((gamepad1.right_stick_y+gamepad1.right_stick_x)/speedReduction);
 
             //Control for collectors
             if (gamepad2.dpad_up == true){
