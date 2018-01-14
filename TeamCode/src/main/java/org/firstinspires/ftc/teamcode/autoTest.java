@@ -79,6 +79,8 @@ public class autoTest extends LinearOpMode {
         telemetry.addData("Status", "Leg 1 complete");
         telemetry.update();
 
+        sleep(10000); //Wait 10 seconds in order to make sure everything works
+
         //Leg 2: Drive backwards 12in at full speed
         telemetry.addData("Status", "Leg 2 in progress");
         telemetry.update();
