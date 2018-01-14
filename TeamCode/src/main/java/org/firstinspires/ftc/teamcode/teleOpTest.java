@@ -52,7 +52,24 @@ public class teleOpTest extends LinearOpMode{
             }else{
                 robot.collectorInit();
             }
+            // Strafing
+            if (gamepad1.left_bumper == true) {
+                robot.leftFrontMotor.setPower(-1);
+                robot.rightFrontMotor.setPower(1);
+                robot.leftRearMotor.setPower(1);
+                robot.rightRearMotor.setPower(-1);
+            }else if (gamepad1.right_bumper == true) {
+                robot.leftFrontMotor.setPower(1);
+                robot.rightFrontMotor.setPower(-1);
+                robot.leftRearMotor.setPower(-1);
+                robot.rightRearMotor.setPower(1);
+            }
+            // Elevator
+            if (gamepad2.y == true);
+            robot.winchMotor
 
+
+             //
             Color.RGBToHSV(robot.colorSensor.red() * 8, robot.colorSensor.green() * 8, robot.colorSensor.blue() * 8, hsvValues);
 
             telemetry.addData("Red :", robot.colorSensor.red());
