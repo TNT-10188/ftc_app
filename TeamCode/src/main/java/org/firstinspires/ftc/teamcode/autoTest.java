@@ -38,7 +38,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 
 @Autonomous(name="autoTest")
-@Disabled
+//@Disabled
 public class autoTest extends LinearOpMode {
 
     /* Declare OpMode members. */
