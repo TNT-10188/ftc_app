@@ -32,13 +32,10 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 
-import java.awt.Color;
 
 @Autonomous(name="autoTest")
 @Disabled
@@ -74,8 +71,8 @@ public class autoTest extends LinearOpMode {
         waitForStart();
 
         // Jewel FLick
-        telemetry.addData("Red", Color.red );
-        telemetry.addData("Blue", Color.blue);
+        telemetry.addData("Red", robot.colorSensor.red());
+        telemetry.addData("Blue", robot.colorSensor.blue());
 
         //Leg 1: Drive forward at full speed for 1 second
         telemetry.addData("Status", "Leg 1 In progress");
