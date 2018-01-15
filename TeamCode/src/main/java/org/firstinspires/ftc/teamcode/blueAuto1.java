@@ -41,7 +41,7 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 import java.awt.Color;
 
 @Autonomous(name="autoTest")
-@Disabled
+//@Disabled
 public class autoTest extends LinearOpMode {
 
     /* Declare OpMode members. */
@@ -72,6 +72,10 @@ public class autoTest extends LinearOpMode {
         telemetry.update();
 
         waitForStart();
+
+        // Jewel FLick
+        telemetry.addData("Red", Color.red );
+        telemetry.addData("Blue", Color.blue);
 
         //Leg 1: Drive forward at full speed for 1 second
         telemetry.addData("Status", "Leg 1 In progress");
