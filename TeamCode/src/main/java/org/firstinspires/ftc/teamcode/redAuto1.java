@@ -38,15 +38,15 @@ import java.awt.Color;
 
 @Autonomous(name="blueAuto1")
 //@Disabled
-public class blueAuto1 extends LinearOpMode {
+public class redAuto1 extends LinearOpMode {
 
     /* Declare OpMode members. */
-    paternosterHardware robot   = new paternosterHardware();
-    private ElapsedTime     runtime = new ElapsedTime();
+    paternosterHardware robot = new paternosterHardware();
+    private ElapsedTime runtime = new ElapsedTime();
 
 
-    static final double     FORWARD_SPEED = 0.6;
-    static final double     TURN_SPEED    = 0.5;
+    static final double FORWARD_SPEED = 0.6;
+    static final double TURN_SPEED = 0.5;
 
     @Override
     public void runOpMode() {
@@ -68,10 +68,21 @@ public class blueAuto1 extends LinearOpMode {
         telemetry.update();
 
         waitForStart();
-
-        // Jewel FLick
-        telemetry.addData("Red", Color.red );
-        telemetry.addData("Blue", Color.blue);
+        while (opModeIsActive()) {
+            // Jewel Arm
+            sleep(1000);
+            robot.jewelArm.setPosition(.29);
+            // Jewel FLick
+            telemetry.addData("Red", robot.colorSensor.red());
+            telemetry.addData("Blue", robot.colorSensor.blue());
+            if (robot.colorSensor.blue() > robot.colorSensor.red()){
+                sleep(1000);
+                robot.jewelFlick.setPosition(0);
+            }else if (robot.colorSensor.blue() < robot.colorSensor.red()) {
+                sleep(1000);
+                robot.jewelFlick.setPosition(1);
+            }else robot.jewelFlick.setPosition(.5);
+        }
 
         //Leg 1: Drive forward at full speed for 1 second
         telemetry.addData("Status", "Leg 1 In progress");
@@ -81,8 +92,9 @@ public class blueAuto1 extends LinearOpMode {
 
         telemetry.addData("Status", "Leg 1 complete");
         telemetry.update();
+    //Wait 10 seconds in order to make sure everything works
+        sleep(10000);
 
-        sleep(10000); //Wait 10 seconds in order to make sure everything works
 
         //Leg 2: Drive backwards 12in at full speed
         telemetry.addData("Status", "Leg 2 in progress");

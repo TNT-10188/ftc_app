@@ -73,6 +73,10 @@ public class autoTest extends LinearOpMode {
 
         waitForStart();
 
+        // Jewel FLick
+        telemetry.addData("Red", Color.red );
+        telemetry.addData("Blue", Color.blue);
+
         //Leg 1: Drive forward at full speed for 1 second
         telemetry.addData("Status", "Leg 1 In progress");
         telemetry.update();

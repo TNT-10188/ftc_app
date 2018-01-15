@@ -30,19 +30,15 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
-
 import java.awt.Color;
 
-@Autonomous(name="autoTest")
+@Autonomous(name="blueAuto1")
 //@Disabled
-public class autoTest extends LinearOpMode {
+public class blueAuto1 extends LinearOpMode {
 
     /* Declare OpMode members. */
     paternosterHardware robot   = new paternosterHardware();
@@ -51,6 +47,9 @@ public class autoTest extends LinearOpMode {
 
     static final double     FORWARD_SPEED = 0.6;
     static final double     TURN_SPEED    = 0.5;
+    boolean jewelMode = false;
+
+
 
     @Override
     public void runOpMode() {
@@ -72,14 +71,28 @@ public class autoTest extends LinearOpMode {
         telemetry.update();
 
         waitForStart();
+        while (opModeIsActive()) {
+        // Jewel Arm
+            sleep(1000);
+            robot.jewelArm.setPosition(.29);
 
         // Jewel FLick
-        telemetry.addData("Red", Color.red );
-        telemetry.addData("Blue", Color.blue);
+        telemetry.addData("Red", robot.colorSensor.red() );
+        telemetry.addData("Blue", robot.colorSensor.blue() );
+        if (robot.colorSensor.blue() > robot.colorSensor.red()){
+            sleep(1000);
+            robot.jewelFlick.setPosition(1);
+        }else if (robot.colorSensor.blue() < robot.colorSensor.red()) {
+            sleep(1000);
+            robot.jewelFlick.setPosition(0);
+        }else robot.jewelFlick.setPosition(.5);
+    }
+
 
         //Leg 1: Drive forward at full speed for 1 second
         telemetry.addData("Status", "Leg 1 In progress");
         telemetry.update();
+
 
         robot.driveTime(1, 1);
 
