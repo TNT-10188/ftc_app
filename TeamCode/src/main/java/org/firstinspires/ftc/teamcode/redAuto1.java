@@ -77,15 +77,8 @@ public class redAuto1 extends LinearOpMode {
             // Jewel FLick
             telemetry.addData("Red", robot.colorSensor.red());
             telemetry.addData("Blue", robot.colorSensor.blue());
-            if (robot.colorSensor.blue() > robot.colorSensor.red()) {
-                sleep(1000);
-                robot.jewelFlick.setPosition(robot.FLICK_LEFT);
-            } else if (robot.colorSensor.blue() < robot.colorSensor.red()) {
-                sleep(1000);
-                robot.jewelFlick.setPosition(robot.FLICK_RIGHT);
-            } else {
-                robot.jewelFlick.setPosition(robot.FLICK_INIT);
-            }
+
+            robot.jewelAuto(true);
 
             //Leg 1: Drive forward at full speed for 1 second
             telemetry.addData("Status", "Leg 1 In progress");
