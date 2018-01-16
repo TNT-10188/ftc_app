@@ -41,14 +41,13 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class blueAuto1 extends LinearOpMode {
 
     /* Declare OpMode members. */
-    paternosterHardware robot   = new paternosterHardware();
-    private ElapsedTime     runtime = new ElapsedTime();
+    paternosterHardware robot = new paternosterHardware();
+    private ElapsedTime runtime = new ElapsedTime();
 
 
-    static final double     FORWARD_SPEED = 0.6;
-    static final double     TURN_SPEED    = 0.5;
+    static final double FORWARD_SPEED = 0.6;
+    static final double TURN_SPEED = 0.5;
     boolean jewelMode = false;
-
 
 
     @Override
@@ -67,52 +66,52 @@ public class blueAuto1 extends LinearOpMode {
         robot.rightRearMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Send telemetry message to signify robot waiting;
-        telemetry.addData("Status", "Ready to run");    //
+        telemetry.addData("Status", "Ready to run");
         telemetry.update();
 
         waitForStart();
         while (opModeIsActive()) {
-        // Jewel Arm
+            // Jewel Arm down
             sleep(1000);
             robot.jewelArm.setPosition(.29);
 
-        // Jewel FLick
-        telemetry.addData("Red", robot.colorSensor.red() );
-        telemetry.addData("Blue", robot.colorSensor.blue() );
-        if (robot.colorSensor.blue() > robot.colorSensor.red()){
+            // Jewel FLick
+            telemetry.addData("Red", robot.colorSensor.red());
+            telemetry.addData("Blue", robot.colorSensor.blue());
+            if (robot.colorSensor.blue() > robot.colorSensor.red()) {
+                sleep(1000);
+                robot.jewelFlick.setPosition(robot.FLICK_LEFT);
+            } else if (robot.colorSensor.blue() < robot.colorSensor.red()) {
+                sleep(1000);
+                robot.jewelFlick.setPosition(robot.FLICK_RIGHT);
+            } else {
+                robot.jewelFlick.setPosition(robot.FLICK_INIT);
+            }
+
+            //Leg 1: Drive forward at full speed for 1 second
+            telemetry.addData("Status", "Leg 1 In progress");
+            telemetry.update();
+
+            robot.driveTime(1, 1);
+
+            telemetry.addData("Status", "Leg 1 complete");
+            telemetry.update();
+
+            sleep(10000); //Wait 10 seconds in order to make sure everything works
+
+            //Leg 2: Drive backwards 12in at full speed
+            telemetry.addData("Status", "Leg 2 in progress");
+            telemetry.update();
+
+            robot.driveInch(-12, -12, 1);
+
+            telemetry.addData("Status", "Leg 2 complete");
+            telemetry.update();
+
+            //Show that opmode is complete
+            telemetry.addData("Status", "Complete");
+            telemetry.update();
             sleep(1000);
-            robot.jewelFlick.setPosition(1);
-        }else if (robot.colorSensor.blue() < robot.colorSensor.red()) {
-            sleep(1000);
-            robot.jewelFlick.setPosition(0);
-        }else robot.jewelFlick.setPosition(.5);
-    }
-
-
-        //Leg 1: Drive forward at full speed for 1 second
-        telemetry.addData("Status", "Leg 1 In progress");
-        telemetry.update();
-
-
-        robot.driveTime(1, 1);
-
-        telemetry.addData("Status", "Leg 1 complete");
-        telemetry.update();
-
-        sleep(10000); //Wait 10 seconds in order to make sure everything works
-
-        //Leg 2: Drive backwards 12in at full speed
-        telemetry.addData("Status", "Leg 2 in progress");
-        telemetry.update();
-
-        robot.driveInch(-12, -12, 1);
-
-        telemetry.addData("Status", "Leg 2 complete");
-        telemetry.update();
-
-        //Show that opmode is complete
-        telemetry.addData("Status", "Complete");
-        telemetry.update();
-        sleep(1000);
+        }
     }
 }
