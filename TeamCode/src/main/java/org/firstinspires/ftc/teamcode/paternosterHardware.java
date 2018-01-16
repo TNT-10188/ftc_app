@@ -183,5 +183,24 @@ public class paternosterHardware {
         leftRearMotor.setPower(0);
         rightRearMotor.setPower(0);
     }
-}
 
+    public void jewelAuto(boolean Red) {
+        if (Red == true) {
+            if (colorSensor.blue() > colorSensor.red()) {
+                jewelFlick.setPosition(FLICK_LEFT);
+            } else if (colorSensor.blue() < colorSensor.red()) {
+                jewelFlick.setPosition(FLICK_RIGHT);
+            } else {
+                jewelFlick.setPosition(FLICK_INIT);
+            }
+        }else{
+            if (colorSensor.blue() < colorSensor.red()) {
+                jewelFlick.setPosition(FLICK_LEFT);
+            } else if (colorSensor.blue() > colorSensor.red()) {
+                jewelFlick.setPosition(FLICK_RIGHT);
+            } else {
+                jewelFlick.setPosition(FLICK_INIT);
+            }
+        }
+    }
+}
