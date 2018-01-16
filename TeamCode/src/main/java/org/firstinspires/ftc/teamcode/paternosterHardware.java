@@ -15,8 +15,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class paternosterHardware {
 
     //Adds motor members.
-    public DcMotor leftFrontMotor  = null;
-    public DcMotor rightFrontMotor  = null;
+    public DcMotor leftFrontMotor = null;
+    public DcMotor rightFrontMotor = null;
     public DcMotor leftRearMotor = null;
     public DcMotor rightRearMotor = null;
 
@@ -46,9 +46,9 @@ public class paternosterHardware {
     public double FLICK_RIGHT = 1;
     public double FLICK_INIT = 0.7;
 
-    static final double COUNTS_PER_MOTOR_REV = 1440 ;
-    static final double DRIVE_GEAR_REDUCTION = 40.0 ;
-    static final double WHEEL_DIAMETER_INCHES = 4.0 ;
+    static final double COUNTS_PER_MOTOR_REV = 1440;
+    static final double DRIVE_GEAR_REDUCTION = 40.0;
+    static final double WHEEL_DIAMETER_INCHES = 4.0;
     //pi was written completely from memory
     static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.141592653589793238462643383279502884197169399375105820974944);
 
@@ -56,11 +56,11 @@ public class paternosterHardware {
     private ElapsedTime runtime = new ElapsedTime();
 
 
-    public paternosterHardware(){
+    public paternosterHardware() {
 
     }
 
-    public void init(HardwareMap ahwMap){
+    public void init(HardwareMap ahwMap) {
 
         hwMap = ahwMap;
 
@@ -95,15 +95,16 @@ public class paternosterHardware {
         leftFrontGuidance = hwMap.servo.get("leftFrontGuidance");
         rightFrontGuidance = hwMap.servo.get("rightFrontGuidance");
         leftRearGuidance = hwMap.servo.get("leftRearGuidance");
-        rightRearGuidance =hwMap.servo.get("rightRearGuidance");
+        rightRearGuidance = hwMap.servo.get("rightRearGuidance");
         leftCollector = hwMap.servo.get("leftCollector");
-        rightCollector =hwMap.servo.get("rightCollector");
+        rightCollector = hwMap.servo.get("rightCollector");
 
         //Define sensors
         colorSensor = hwMap.get(ModernRoboticsI2cColorSensor.class, "colorSensor");
     }
+
     //Initializes guidance motors
-    public void collectorInit(){
+    public void collectorInit() {
         leftFrontGuidance.setPosition(0.5);
         rightFrontGuidance.setPosition(0.5);
         leftRearGuidance.setPosition(0.5);
@@ -111,8 +112,9 @@ public class paternosterHardware {
         leftCollector.setPosition(0.5);
         rightCollector.setPosition(0.5);
     }
+
     //Shortens the control of the guidance servos
-    public void guidanceControl(double guide1, double guide2, double guide3, double guide4, double guide5, double guide6){
+    public void guidanceControl(double guide1, double guide2, double guide3, double guide4, double guide5, double guide6) {
         leftFrontGuidance.setPosition(guide1);
         rightFrontGuidance.setPosition(guide2);
         leftRearGuidance.setPosition(guide3);
@@ -121,8 +123,8 @@ public class paternosterHardware {
         rightCollector.setPosition(guide6);
     }
 
-    public void driveTime(double speed, double time){
-        if (speed >= -1 && speed <= 1){
+    public void driveTime(double speed, double time) {
+        if (speed >= -1 && speed <= 1) {
             runtime.reset();
             while (runtime.seconds() < time) {
                 leftFrontMotor.setPower(speed);
@@ -137,18 +139,18 @@ public class paternosterHardware {
         rightRearMotor.setPower(0);
     }
 
-    public void driveInch(double leftInch, double rightInch, double speed){
+    public void driveInch(double leftInch, double rightInch, double speed) {
 
         int leftFrontTarget;
         int rightFrontTarget;
         int leftRearTarget;
         int rightRearTarget;
 
-        if (speed >= -1 && speed <= 1){
-            leftFrontTarget = leftFrontMotor.getCurrentPosition() + (int)(leftInch * COUNTS_PER_INCH);
-            rightFrontTarget = rightFrontMotor.getCurrentPosition() + (int)(rightInch * COUNTS_PER_INCH);
-            leftRearTarget = leftRearMotor.getCurrentPosition() + (int)(leftInch * COUNTS_PER_INCH);
-            rightRearTarget = rightRearMotor.getCurrentPosition() + (int)(rightInch * COUNTS_PER_INCH);
+        if (speed >= -1 && speed <= 1) {
+            leftFrontTarget = leftFrontMotor.getCurrentPosition() + (int) (leftInch * COUNTS_PER_INCH);
+            rightFrontTarget = rightFrontMotor.getCurrentPosition() + (int) (rightInch * COUNTS_PER_INCH);
+            leftRearTarget = leftRearMotor.getCurrentPosition() + (int) (leftInch * COUNTS_PER_INCH);
+            rightRearTarget = rightRearMotor.getCurrentPosition() + (int) (rightInch * COUNTS_PER_INCH);
 
             leftFrontMotor.setTargetPosition(leftFrontTarget);
             rightFrontMotor.setTargetPosition(rightFrontTarget);
@@ -165,7 +167,7 @@ public class paternosterHardware {
             leftRearMotor.setPower(Math.abs(speed));
             rightRearMotor.setPower(Math.abs(speed));
 
-            while(leftFrontMotor.isBusy() && rightFrontMotor.isBusy() && leftRearMotor.isBusy() && rightRearMotor.isBusy()){
+            while (leftFrontMotor.isBusy() && rightFrontMotor.isBusy() && leftRearMotor.isBusy() && rightRearMotor.isBusy()) {
 
             }
             leftFrontMotor.setPower(0);
