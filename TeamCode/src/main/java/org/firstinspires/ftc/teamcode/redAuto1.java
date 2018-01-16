@@ -72,42 +72,44 @@ public class redAuto1 extends LinearOpMode {
             // Jewel Arm
             sleep(1000);
             robot.jewelArm.setPosition(.29);
+
             // Jewel FLick
             telemetry.addData("Red", robot.colorSensor.red());
             telemetry.addData("Blue", robot.colorSensor.blue());
-            if (robot.colorSensor.blue() > robot.colorSensor.red()){
+            if (robot.colorSensor.blue() > robot.colorSensor.red()) {
                 sleep(1000);
-                robot.jewelFlick.setPosition(0);
-            }else if (robot.colorSensor.blue() < robot.colorSensor.red()) {
+                robot.jewelFlick.setPosition(robot.FLICK_LEFT);
+            } else if (robot.colorSensor.blue() < robot.colorSensor.red()) {
                 sleep(1000);
-                robot.jewelFlick.setPosition(1);
-            }else robot.jewelFlick.setPosition(.5);
+                robot.jewelFlick.setPosition(robot.FLICK_RIGHT);
+            } else {
+                robot.jewelFlick.setPosition(robot.FLICK_INIT);
+            }
+
+            //Leg 1: Drive forward at full speed for 1 second
+            telemetry.addData("Status", "Leg 1 In progress");
+            telemetry.update();
+
+            robot.driveTime(1, 1);
+
+            telemetry.addData("Status", "Leg 1 complete");
+            telemetry.update();
+
+            sleep(10000);   //Wait 10 seconds in order to make sure everything works
+
+            //Leg 2: Drive backwards 12in at full speed
+            telemetry.addData("Status", "Leg 2 in progress");
+            telemetry.update();
+
+            robot.driveInch(-12, -12, 1);
+
+            telemetry.addData("Status", "Leg 2 complete");
+            telemetry.update();
+
+            //Show that opmode is complete
+            telemetry.addData("Status", "Complete");
+            telemetry.update();
+            sleep(1000);
         }
-
-        //Leg 1: Drive forward at full speed for 1 second
-        telemetry.addData("Status", "Leg 1 In progress");
-        telemetry.update();
-
-        robot.driveTime(1, 1);
-
-        telemetry.addData("Status", "Leg 1 complete");
-        telemetry.update();
-    //Wait 10 seconds in order to make sure everything works
-        sleep(10000);
-
-
-        //Leg 2: Drive backwards 12in at full speed
-        telemetry.addData("Status", "Leg 2 in progress");
-        telemetry.update();
-
-        robot.driveInch(-12, -12, 1);
-
-        telemetry.addData("Status", "Leg 2 complete");
-        telemetry.update();
-
-        //Show that opmode is complete
-        telemetry.addData("Status", "Complete");
-        telemetry.update();
-        sleep(1000);
     }
 }
