@@ -68,6 +68,7 @@ public class redAuto1 extends LinearOpMode {
         telemetry.update();
 
         waitForStart();
+        
         while (opModeIsActive()) {
             // Jewel Arm
             sleep(1000);
