@@ -77,11 +77,6 @@ public class redAuto1 extends LinearOpMode {
             // Jewel FLick
             telemetry.addData("Red", robot.colorSensor.red());
             telemetry.addData("Blue", robot.colorSensor.blue());
-            if (robot.colorSensor.blue() > robot.colorSensor.red()) {
-                robot.jewelFlick.setPosition(0);
-            }else if (robot.colorSensor.blue() < robot.colorSensor.red()) {
-                robot.jewelFlick.setPosition(1);
-            }
 
             robot.jewelAuto(true);
 
