@@ -74,11 +74,14 @@ public class redAuto1 extends LinearOpMode {
             sleep(1000);
             robot.jewelArm.setPosition(.29);
 
-            // Jewel FLick
+            //Leg 0: Knock off blue jewel
             telemetry.addData("Red", robot.colorSensor.red());
             telemetry.addData("Blue", robot.colorSensor.blue());
 
             robot.jewelAuto(true);
+
+            telemetry.addData("Status", "Leg 0 complete");
+            telemetry.update();
 
             //Leg 1: Drive forward at full speed for 1 second
             telemetry.addData("Status", "Leg 1 In progress");
