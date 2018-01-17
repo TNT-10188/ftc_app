@@ -68,7 +68,15 @@ public class teleOpTest extends LinearOpMode{
             }
 
 
-
+            if (gamepad2.y == true) {
+                robot.winchMotor.setTargetPosition(0);
+            }else if (gamepad2.b == true) {
+                robot.winchMotor.setTargetPosition(1800);
+            }else if (gamepad2.a == true) {
+                robot.winchMotor.setTargetPosition(3600);
+            }else if (gamepad2.x == true) {
+                robot.winchMotor.setTargetPosition(5000);
+            }
              //
             Color.RGBToHSV(robot.colorSensor.red() * 8, robot.colorSensor.green() * 8, robot.colorSensor.blue() * 8, hsvValues);
 
