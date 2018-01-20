@@ -89,7 +89,7 @@ public class autoTest extends LinearOpMode {
         telemetry.addData("Status", "Leg 2 in progress");
         telemetry.update();
 
-        robot.driveInch(-12, -12, 1);
+        //robot.driveInch(-12.0, -12.0, 1.0, 5);
 
         telemetry.addData("Status", "Leg 2 complete");
         telemetry.update();
