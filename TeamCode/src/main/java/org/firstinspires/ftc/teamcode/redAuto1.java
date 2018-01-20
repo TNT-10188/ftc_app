@@ -36,13 +36,14 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 
-@Autonomous(name="blueAuto1")
+@Autonomous(name="redAuto1")
 //@Disabled
 public class redAuto1 extends LinearOpMode {
 
     /* Declare OpMode members. */
     paternosterHardware robot = new paternosterHardware();
     private ElapsedTime runtime = new ElapsedTime();
+    public boolean encoderMode;
 
 
     static final double FORWARD_SPEED = 0.6;
@@ -52,6 +53,9 @@ public class redAuto1 extends LinearOpMode {
     public void runOpMode() {
 
         robot.init(hardwareMap);
+        // collector initialization (the initialization doesn't work for the front collectors unless the following is done)
+        robot.leftCollector.setPosition(0.5);
+        robot.rightCollector.setPosition(0.5);
 
         robot.leftFrontMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.rightFrontMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -70,43 +74,47 @@ public class redAuto1 extends LinearOpMode {
         waitForStart();
         
         while (opModeIsActive()) {
-            // Jewel Arm
-            sleep(1000);
-            robot.jewelArm.setPosition(.29);
-
             //Leg 0: Knock off blue jewel
             telemetry.addData("Red", robot.colorSensor.red());
             telemetry.addData("Blue", robot.colorSensor.blue());
+            telemetry.update();
 
-            robot.jewelAuto(true);
+            robot.jewelAuto(true, 10);
+            sleep(3000);
 
+            telemetry.addData("Fibonacci", robot.fib);
             telemetry.addData("Status", "Leg 0 complete");
             telemetry.update();
 
-            //Leg 1: Drive forward at full speed for 1 second
-            telemetry.addData("Status", "Leg 1 In progress");
-            telemetry.update();
+            //Leg 1: Drive forward for 6 inches at half speed
+            //telemetry.addData("Status", "Leg 1 In progress");
+            //telemetry.update();
+            //telemetry.addData("leftFrontMotor targetPosition", robot.leftFrontMotor.getTargetPosition());
+            //boolean encoderMode = true;
+            //robot.inches(6,0.5);
 
-            robot.driveTime(1, 1);
+
+            robot.driveTime(0.5, 1);
+
 
             telemetry.addData("Status", "Leg 1 complete");
             telemetry.update();
 
-            sleep(10000);   //Wait 10 seconds in order to make sure everything works
+            sleep(3000);   //Wait 3 seconds in order to make sure everything works
 
-            //Leg 2: Drive backwards 12in at full speed
-            telemetry.addData("Status", "Leg 2 in progress");
-            telemetry.update();
+            //Leg 2: Drive backwards 12in at half speed
+            //telemetry.addData("Status", "Leg 2 in progress");
+            //telemetry.update();
 
-            robot.driveInch(-12, -12, 1);
+            //robot.driveInch(6, 6, 0.5, 5);
 
-            telemetry.addData("Status", "Leg 2 complete");
-            telemetry.update();
+            //telemetry.addData("Status", "Leg 2 complete");
+            //telemetry.update();
 
             //Show that opmode is complete
             telemetry.addData("Status", "Complete");
             telemetry.update();
-            sleep(1000);
+            sleep(30000);
         }
     }
 }
