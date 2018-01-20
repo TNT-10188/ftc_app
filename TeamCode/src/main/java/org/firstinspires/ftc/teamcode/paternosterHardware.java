@@ -142,14 +142,32 @@ public class paternosterHardware {
                 leftRearMotor.setPower(speed);
                 rightRearMotor.setPower(speed);
             }
+        } else {
+            leftFrontMotor.setPower(0);
+            rightFrontMotor.setPower(0);
+            leftRearMotor.setPower(0);
+            rightRearMotor.setPower(0);
         }
-        leftFrontMotor.setPower(0);
-        rightFrontMotor.setPower(0);
-        leftRearMotor.setPower(0);
-        rightRearMotor.setPower(0);
     }
 
-    public void driveInch(double leftInch, double rightInch, double speed) {
+    // experimental encoder use
+    public void inches(int distance, double powerLevel) {
+        if (encoderMode) {
+            leftFrontMotor.setTargetPosition(distance * 4584);
+            if ((leftFrontMotor.getCurrentPosition() + 250 < leftFrontMotor.getTargetPosition())) {
+                leftFrontMotor.setPower(powerLevel);
+                rightFrontMotor.setPower(powerLevel);
+                leftRearMotor.setPower(powerLevel);
+                rightRearMotor.setPower(powerLevel);
+            } else {
+                leftFrontMotor.setPower(0);
+                rightFrontMotor.setPower(0);
+                leftRearMotor.setPower(0);
+                rightRearMotor.setPower(0);
+            }
+        }
+    }
+    public void driveInch(double leftInch, double rightInch, double speed, double timeoutSeconds) {
 
         int leftFrontTarget;
         int rightFrontTarget;
@@ -172,12 +190,13 @@ public class paternosterHardware {
             leftRearMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             rightRearMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
+            runtime.reset();
             leftFrontMotor.setPower(Math.abs(speed));
             rightFrontMotor.setPower(Math.abs(speed));
             leftRearMotor.setPower(Math.abs(speed));
             rightRearMotor.setPower(Math.abs(speed));
 
-            while (leftFrontMotor.isBusy() && rightFrontMotor.isBusy() && leftRearMotor.isBusy() && rightRearMotor.isBusy()) {
+            while ((runtime.seconds() < timeoutSeconds) && (leftFrontMotor.isBusy() && rightFrontMotor.isBusy() && leftRearMotor.isBusy() && rightRearMotor.isBusy())) {
 
             }
             leftFrontMotor.setPower(0);
