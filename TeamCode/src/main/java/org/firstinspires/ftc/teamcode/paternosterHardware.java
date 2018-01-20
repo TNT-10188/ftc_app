@@ -39,12 +39,22 @@ public class paternosterHardware {
     public ColorSensor colorSensor = null;
 
     //Useful variables
-    public static final double ARM_UP = 0.2;
-    public static final double ARM_DOWN = 0.775;
+    public static final double ARM_UP = .25;
+    public static final double ARM_INIT = 0.29;
+    public static final double ARM_DOWN = 0.415;
 
-    public double FLICK_LEFT = 0.3;
-    public double FLICK_RIGHT = 1;
-    public double FLICK_INIT = 0.7;
+    public static final int POSITION_1 = 0;
+    public static final int POSITION_2 = 3500;
+    public static final int POSITION_3 = 6800;
+    public static final int POSITION_4 = 10000;
+
+    public double FLICK_LEFT = 0.1;
+    public double FLICK_RIGHT = 0.0;
+    public double FLICK_INIT = 0.45;
+
+    public boolean encoderMode;
+
+    public int fib;
 
     static final double COUNTS_PER_MOTOR_REV = 1440;
     static final double DRIVE_GEAR_REDUCTION = 40.0;
