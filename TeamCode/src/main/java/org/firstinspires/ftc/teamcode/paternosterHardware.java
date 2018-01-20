@@ -98,7 +98,7 @@ public class paternosterHardware {
         jewelFlick = hwMap.servo.get("jewelFlick");
 
         //Init arm
-        jewelArm.setPosition(ARM_UP);
+        jewelArm.setPosition(ARM_INIT);
         jewelFlick.setPosition(FLICK_INIT);
 
         //Define collectors
