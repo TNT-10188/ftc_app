@@ -196,23 +196,60 @@ public class paternosterHardware {
         rightRearMotor.setPower(0);
     }
 
-    public void jewelAuto(boolean Red) {
-        if (Red == true) {
-            if (colorSensor.blue() > colorSensor.red()) {
-                jewelFlick.setPosition(FLICK_LEFT);
-            } else if (colorSensor.blue() < colorSensor.red()) {
-                jewelFlick.setPosition(FLICK_RIGHT);
+    public void jewelAuto(boolean Red, double timeoutSeconds) {
+
+        jewelArm.setPosition(ARM_DOWN);
+
+        runtime.reset();
+
+        int x = 0;
+        int y = 1;
+        int z;
+        while (runtime.seconds() < 1){
+            z = x + y;
+            x = y;
+            y = z;
+        }
+
+        while (runtime.seconds() < timeoutSeconds){
+            if (Red == true) {
+                if (colorSensor.blue() > colorSensor.red()) {
+                    jewelFlick.setPosition(FLICK_LEFT);
+                    break;
+                } else if (colorSensor.blue() < colorSensor.red()) {
+                    jewelFlick.setPosition(FLICK_RIGHT);
+                    break;
+                } else {
+                    jewelFlick.setPosition(FLICK_INIT);
+                    break;
+                }
             } else {
-                jewelFlick.setPosition(FLICK_INIT);
-            }
-        }else{
-            if (colorSensor.blue() < colorSensor.red()) {
-                jewelFlick.setPosition(FLICK_LEFT);
-            } else if (colorSensor.blue() > colorSensor.red()) {
-                jewelFlick.setPosition(FLICK_RIGHT);
-            } else {
-                jewelFlick.setPosition(FLICK_INIT);
+                if (colorSensor.blue() < colorSensor.red()) {
+                    jewelFlick.setPosition(FLICK_LEFT);
+                    break;
+                } else if (colorSensor.blue() > colorSensor.red()) {
+                    jewelFlick.setPosition(FLICK_RIGHT);
+                    break;
+                } else {
+                    jewelFlick.setPosition(FLICK_INIT);
+                    break;
+                }
             }
         }
+        runtime.reset();
+
+        x = 0;
+        y = 1;
+        while (runtime.seconds() < 1){
+            z = x + y;
+            x = y;
+            y = z;
+        }
+          z = fib;
+
+        jewelFlick.setPosition(FLICK_INIT);
+
+        jewelArm.setPosition(ARM_UP);
+
     }
 }
