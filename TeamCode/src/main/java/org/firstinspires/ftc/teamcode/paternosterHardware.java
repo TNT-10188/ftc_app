@@ -114,7 +114,7 @@ public class paternosterHardware {
     }
 
     //Initializes guidance motors
-    public void collectorInit() {
+    public void collectorInit() throws InterruptedException {
         leftFrontGuidance.setPosition(0.5);
         rightFrontGuidance.setPosition(0.5);
         leftRearGuidance.setPosition(0.5);
@@ -124,7 +124,7 @@ public class paternosterHardware {
     }
 
     //Shortens the control of the guidance servos
-    public void guidanceControl(double guide1, double guide2, double guide3, double guide4, double guide5, double guide6) {
+    public void guidanceControl(double guide1, double guide2, double guide3, double guide4, double guide5, double guide6) throws InterruptedException {
         leftFrontGuidance.setPosition(guide1);
         rightFrontGuidance.setPosition(guide2);
         leftRearGuidance.setPosition(guide3);
@@ -133,7 +133,7 @@ public class paternosterHardware {
         rightCollector.setPosition(guide6);
     }
 
-    public void driveTime(double speed, double time) {
+    public void driveTime(double speed, double time) throws InterruptedException {
         if (speed >= -1 && speed <= 1) {
             runtime.reset();
             while (runtime.seconds() < time) {
@@ -148,10 +148,14 @@ public class paternosterHardware {
             leftRearMotor.setPower(0);
             rightRearMotor.setPower(0);
         }
+        leftFrontMotor.setPower(0);
+        rightFrontMotor.setPower(0);
+        leftRearMotor.setPower(0);
+        rightRearMotor.setPower(0);
     }
 
     // experimental encoder use
-    public void inches(int distance, double powerLevel) {
+    public void inches(int distance, double powerLevel) throws InterruptedException {
         if (encoderMode) {
             leftFrontMotor.setTargetPosition(distance * 4584);
             if ((leftFrontMotor.getCurrentPosition() + 250 < leftFrontMotor.getTargetPosition())) {
@@ -167,7 +171,8 @@ public class paternosterHardware {
             }
         }
     }
-    public void driveInch(double leftInch, double rightInch, double speed, double timeoutSeconds) {
+
+    public void driveInch(double leftInch, double rightInch, double speed, double timeoutSeconds) throws InterruptedException {
 
         int leftFrontTarget;
         int rightFrontTarget;
@@ -215,20 +220,11 @@ public class paternosterHardware {
         rightRearMotor.setPower(0);
     }
 
-    public void jewelAuto(boolean Red, double timeoutSeconds) {
+    public void jewelAuto(boolean Red, double timeoutSeconds) throws InterruptedException {
 
         jewelArm.setPosition(ARM_DOWN);
 
-        runtime.reset();
-
-        int x = 0;
-        int y = 1;
-        int z;
-        while (runtime.seconds() < 1){
-            z = x + y;
-            x = y;
-            y = z;
-        }
+        Thread.sleep(1000);
 
         while (runtime.seconds() < timeoutSeconds){
             if (Red == true) {
