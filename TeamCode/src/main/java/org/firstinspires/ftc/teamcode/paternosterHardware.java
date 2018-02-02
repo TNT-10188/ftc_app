@@ -54,21 +54,14 @@ public class paternosterHardware {
 
     public boolean encoderMode;
 
-    public int fib;
-
     static final double COUNTS_PER_MOTOR_REV = 1440;
     static final double DRIVE_GEAR_REDUCTION = 40.0;
     static final double WHEEL_DIAMETER_INCHES = 4.0;
-    //pi was written completely from memory
-    static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.141592653589793238462643383279502884197169399375105820974944);
+    static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * Math.PI);
 
     HardwareMap hwMap = null;
     private ElapsedTime runtime = new ElapsedTime();
 
-
-    public paternosterHardware() {
-
-    }
 
     public void init(HardwareMap ahwMap) {
 
@@ -251,16 +244,7 @@ public class paternosterHardware {
                 }
             }
         }
-        runtime.reset();
-
-        x = 0;
-        y = 1;
-        while (runtime.seconds() < 1){
-            z = x + y;
-            x = y;
-            y = z;
-        }
-          z = fib;
+        Thread.sleep(1000);
 
         jewelFlick.setPosition(FLICK_INIT);
 
