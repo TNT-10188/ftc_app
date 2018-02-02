@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.util.Range;
 import android.view.View;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -29,9 +30,6 @@ public class teleOpTest extends LinearOpMode{
         float hsvValues[] = {0F,0F,0F};
         final float values[] = hsvValues;
         int speedReduction = 3;
-
-
-
 
         int relativeLayoutId = hardwareMap.appContext.getResources().getIdentifier("RelativeLayout", "id", hardwareMap.appContext.getPackageName());
         final View relativeLayout = ((Activity) hardwareMap.appContext).findViewById(relativeLayoutId);
@@ -71,47 +69,33 @@ public class teleOpTest extends LinearOpMode{
             // Elevator
             telemetry.addData("Elevator", robot.winchMotor.getCurrentPosition());
             telemetry.update();
-            int targetLifter;
-            /**if (gamepad2.right_bumper == true){
-                targetLifter = (robot.winchMotor.getCurrentPosition() + 100);
-                robot.winchMotor.setTargetPosition(targetLifter);
-                robot.winchMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                robot.winchMotor.setPower(1);
-            }else if (gamepad2.left_bumper == true)
-                targetLifter = (robot.winchMotor.getCurrentPosition() - 100);
-                robot.winchMotor.setTargetPosition(targetLifter);
-                robot.winchMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                robot.winchMotor.setPower(1);**/
+
             if (gamepad2.y == true) {
                 robot.winchMotor.setTargetPosition(robot.POSITION_1);
                 robot.winchMotor.setPower(1);
+                robot.winchMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-                while ((robot.winchMotor.getCurrentPosition()) <= (robot.POSITION_1 + 250) || (robot.winchMotor.getCurrentPosition()) >= (robot.POSITION_1 - 250)) {
-                    robot.winchMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                }
+                while (robot.winchMotor.isBusy()) {}
             }else if (gamepad2.b == true) {
                 robot.winchMotor.setTargetPosition(robot.POSITION_2);
                 robot.winchMotor.setPower(1);
+                robot.winchMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-                while ((robot.winchMotor.getCurrentPosition()) <= (robot.POSITION_2 + 250) || (robot.winchMotor.getCurrentPosition()) >= (robot.POSITION_2 - 250)) {
-                    robot.winchMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                }
+                while (robot.winchMotor.isBusy()) {}
             }else if (gamepad2.a == true) {
                 robot.winchMotor.setTargetPosition(robot.POSITION_3);
                 robot.winchMotor.setPower(1);
+                robot.winchMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-                while ((robot.winchMotor.getCurrentPosition()) <= (robot.POSITION_3 + 250) || (robot.winchMotor.getCurrentPosition()) >= (robot.POSITION_3 - 250)) {
-                    robot.winchMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                }
+                while (robot.winchMotor.isBusy()) {}
             }else if (gamepad2.x == true) {
                 robot.winchMotor.setTargetPosition(robot.POSITION_4);
                 robot.winchMotor.setPower(1);
+                robot.winchMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-                while ((robot.winchMotor.getCurrentPosition()) <= (robot.POSITION_4 + 250) || (robot.winchMotor.getCurrentPosition()) >= (robot.POSITION_4 - 250)) {
-                    robot.winchMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                }
+                while (robot.winchMotor.isBusy()) {}
             }
-             //
+
             Color.RGBToHSV(robot.colorSensor.red() * 8, robot.colorSensor.green() * 8, robot.colorSensor.blue() * 8, hsvValues);
 
             telemetry.addData("Red :", robot.colorSensor.red());
