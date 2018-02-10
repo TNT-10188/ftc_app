@@ -27,12 +27,12 @@ public class teleOpTest extends LinearOpMode{
 
         waitForStart();
 
-        float hsvValues[] = {0F,0F,0F};
-        final float values[] = hsvValues;
+        //float hsvValues[] = {0F,0F,0F};
+        //final float values[] = hsvValues;
         int speedReduction = 3;
 
-        int relativeLayoutId = hardwareMap.appContext.getResources().getIdentifier("RelativeLayout", "id", hardwareMap.appContext.getPackageName());
-        final View relativeLayout = ((Activity) hardwareMap.appContext).findViewById(relativeLayoutId);
+        //int relativeLayoutId = hardwareMap.appContext.getResources().getIdentifier("RelativeLayout", "id", hardwareMap.appContext.getPackageName());
+       //final View relativeLayout = ((Activity) hardwareMap.appContext).findViewById(relativeLayoutId);
 
         while(opModeIsActive()){
             //Control for motors
@@ -96,7 +96,7 @@ public class teleOpTest extends LinearOpMode{
                 while (robot.winchMotor.isBusy()) {}
             }
 
-            Color.RGBToHSV(robot.colorSensor.red() * 8, robot.colorSensor.green() * 8, robot.colorSensor.blue() * 8, hsvValues);
+            //Color.RGBToHSV(robot.colorSensor.red() * 8, robot.colorSensor.green() * 8, robot.colorSensor.blue() * 8, hsvValues);
 
             telemetry.addData("Red :", robot.colorSensor.red());
             telemetry.addData("Blue:", robot.colorSensor.blue());

@@ -50,7 +50,7 @@ public class redAuto1 extends LinearOpMode {
     static final double TURN_SPEED = 0.5;
 
     @Override
-    public void runOpMode() {
+    public void runOpMode() throws InterruptedException {
 
         robot.init(hardwareMap);
         // collector initialization (the initialization doesn't work for the front collectors unless the following is done)
@@ -82,7 +82,6 @@ public class redAuto1 extends LinearOpMode {
             robot.jewelAuto(true, 10);
             sleep(3000);
 
-            telemetry.addData("Fibonacci", robot.fib);
             telemetry.addData("Status", "Leg 0 complete");
             telemetry.update();
 

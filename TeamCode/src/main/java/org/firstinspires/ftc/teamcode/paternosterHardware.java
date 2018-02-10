@@ -249,6 +249,8 @@ public class paternosterHardware {
         jewelFlick.setPosition(FLICK_INIT);
 
         jewelArm.setPosition(ARM_UP);
-
+    }
+    public void driveHeading(double inch, double heading, double speed){
+        
     }
 }
