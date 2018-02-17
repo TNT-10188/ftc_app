@@ -222,10 +222,10 @@ public class paternosterHardware {
         while (runtime.seconds() < timeoutSeconds){
             if (Red == true) {
                 if (colorSensor.blue() > colorSensor.red()) {
-                    jewelFlick.setPosition(FLICK_LEFT);
+                    jewelFlick.setPosition(FLICK_RIGHT);
                     break;
                 } else if (colorSensor.blue() < colorSensor.red()) {
-                    jewelFlick.setPosition(FLICK_RIGHT);
+                    jewelFlick.setPosition(FLICK_LEFT);
                     break;
                 } else {
                     jewelFlick.setPosition(FLICK_INIT);
@@ -233,10 +233,10 @@ public class paternosterHardware {
                 }
             } else {
                 if (colorSensor.blue() < colorSensor.red()) {
-                    jewelFlick.setPosition(FLICK_LEFT);
+                    jewelFlick.setPosition(FLICK_RIGHT);
                     break;
                 } else if (colorSensor.blue() > colorSensor.red()) {
-                    jewelFlick.setPosition(FLICK_RIGHT);
+                    jewelFlick.setPosition(FLICK_LEFT);
                     break;
                 } else {
                     jewelFlick.setPosition(FLICK_INIT);

@@ -79,27 +79,27 @@ public class redAuto1 extends LinearOpMode {
             telemetry.addData("Blue", robot.colorSensor.blue());
             telemetry.update();
 
-            robot.jewelAuto(true, 10);
+
+            robot.jewelAuto(true, 5);
             sleep(3000);
+            robot.jewelArm.setPosition(0.25);
 
             telemetry.addData("Status", "Leg 0 complete");
             telemetry.update();
 
-            //Leg 1: Drive forward for 6 inches at half speed
-            //telemetry.addData("Status", "Leg 1 In progress");
-            //telemetry.update();
-            //telemetry.addData("leftFrontMotor targetPosition", robot.leftFrontMotor.getTargetPosition());
-            //boolean encoderMode = true;
-            //robot.inches(6,0.5);
+            //Leg 1: Drive forward for 1 second at half speed
+            telemetry.addData("Status", "Leg 1 In progress");
+            telemetry.update();
 
 
-            robot.driveTime(0.5, 1);
+            robot.driveTime(0.5, 1000);
 
 
             telemetry.addData("Status", "Leg 1 complete");
             telemetry.update();
 
-            sleep(3000);   //Wait 3 seconds in order to make sure everything works
+            //sleep(3000);
+            // Wait 3 seconds in order to make sure everything works
 
             //Leg 2: Drive backwards 12in at half speed
             //telemetry.addData("Status", "Leg 2 in progress");
